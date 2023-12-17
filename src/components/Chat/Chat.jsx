@@ -42,7 +42,7 @@ export const Chat = () => {
     <>
       <div style={{maxHeight: '75vh'}} className="overflow-hidden overflow-y-auto">
         <div className='flex justify-center'>
-          <div className="md:w-2/3 md:m-10">
+          <div className="md:w-2/3 md:m-10 mb-30">
             {
               chatHistory.map(({message, image}, index) => (
                 <div key={message} className=" p-2 m-2">
