@@ -39,31 +39,33 @@ export const Chat = () => {
     return (woof.repeat(Math.round(Math.random()*20)+5))
   }
   return (
-    <div style={{maxHeight: '75vh'}} className="overflow-hidden overflow-y-auto">
-      <div className='flex justify-center'>
-        <div className="md:w-2/3 md:m-10">
-          {
-            chatHistory.map(({message, image}, index) => (
-              <div key={message} className=" p-2 m-2">
-                <div className="flex items-center gap-2 mb-2">
-                  <img src={(index%2 === 0) ? UserLogo : DOGLogo} className="w-8 h-8 bg-white rounded-full text-black p-2" />
-                  <strong>{(index%2 === 0) ? 'You': 'Doggo'}</strong>
+    <>
+      <div style={{maxHeight: '75vh'}} className="overflow-hidden overflow-y-auto">
+        <div className='flex justify-center'>
+          <div className="md:w-2/3 md:m-10">
+            {
+              chatHistory.map(({message, image}, index) => (
+                <div key={message} className=" p-2 m-2">
+                  <div className="flex items-center gap-2 mb-2">
+                    <img src={(index%2 === 0) ? UserLogo : DOGLogo} className="w-8 h-8 bg-white rounded-full text-black p-2" />
+                    <strong>{(index%2 === 0) ? 'You': 'Doggo'}</strong>
+                  </div>
+                  <p className='ml-10'>{(index%2 === 0 && index !== chatHistory.length-1) ? message : <Typewriter words={[message]} loop={true} typingSpeed={20} erasingSpeed={2000000000} />}</p>
+                  {!!image && (
+                    <img src={image} className='ml-10 my-4 h-80' />
+                  )}
                 </div>
-                <p className='ml-10'>{(index%2 === 0 && index !== chatHistory.length-1) ? message : <Typewriter words={[message]} loop={true} typingSpeed={20} erasingSpeed={2000000000} />}</p>
-                {!!image && (
-                  <img src={image} className='ml-10 my-4 h-80' />
-                )}
-              </div>
-            ))
-          }
-          {!chatHistory.length && (
-            <p className='flex items-center'>Try asking &quot;Woof woof&quot;</p>
-          )}
-          <div ref={scrollDiv} id="scrollDiv"></div>
+              ))
+            }
+            {!chatHistory.length && (
+              <p className='flex items-center'>Try asking &quot;Woof woof&quot;</p>
+            )}
+            <div ref={scrollDiv} id="scrollDiv"></div>
+          </div>
         </div>
       </div>
       <form onSubmit={handleSubmit} className="flex justify-center">
-        <div className="absolute bottom-4 flex" style={{width: '90%'}}>
+        <div className="fixed bottom-4 flex" style={{width: '90%'}}>
           <input className="m-4 h-12 font-base p-2 dark:text-white dark:bg-gray-700 rounded-md"
             style={{width: '90%'}}
             onChange={handleChange}
@@ -74,8 +76,7 @@ export const Chat = () => {
             <img className="h-10 w-10 bg-green-900 p-2 rounded" src={SendIcon} />
           </button>
         </div>
-        
       </form>
-    </div>
+    </>
   )
 }
